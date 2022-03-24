@@ -1,0 +1,27 @@
+#include<stdio.h> //Метод Дихотомии
+#include<math.h>
+float e=2.72;
+float f(float x)
+{
+return x*pow(e,x)-1;
+}
+int main()
+{
+int n = 0;
+  float a=0;
+  float b=1;
+  float c;
+  float eps = 0.0001;
+  while(fabs(a-b)>=eps){
+  //for(int n=1;b-a>eps;n++)
+ c = (a + b) / 2;
+if (f(c) * f(a) > 0)
+a = c;
+else
+b = c;
+n++;
+}
+printf("%f",c);
+printf("\nKollichestvo iteraciy = %d",n);
+return 0;
+}
