@@ -16,7 +16,7 @@ float a=0;
 float b=1;
 float eps = 0.0001;
 c = a - (b - a) / (f(b) - f(a)) * f(a);
-do
+while ((f(c + eps) * f(c - eps) > 0))
 {
 if (f(a) * f(c) < 0)
 {
@@ -28,7 +28,7 @@ a = c;
 }
 c = a - (b - a) / (f(b) - f(a)) * f(a);
 n+=1;
-} while ((f(c + eps) * f(c - eps) > 0));
+}  
 printf("%f", c);
 printf("\nKollichestvo iteraciy = %d", n);
 return 0;
