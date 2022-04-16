@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <math.h>
+
+double f(double x)
+{
+return 0.5 - cos(x - 1);
+}
+
+double g(double y)
+{
+return 3 + cos(y);
+}
+
+int main()
+{
+double c= 1, b = 2, eps = 0.0001,x,y;
+x = f(c);
+y = g(b);
+while (((fabs(x-c)>eps))&&((fabs(y-b)>eps)))
+{
+c = x;
+x = f(c);
+b = y;
+y = g(b);
+}
+printf("x = %f", c);
+printf(" ");
+printf("y = %f", b);
+return 0;
+}
