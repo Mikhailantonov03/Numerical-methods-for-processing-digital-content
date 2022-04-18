@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include<math.h>
+
+
+int main()
+{
+float U [100], V[100], x[100];
+float ci = 1, ai = 1, bi = 2,di = 30;
+U[0] = -ci / bi;
+V[0] = di / bi;
+U[99] = 0;
+for (int i = 1; i <= 98; i++)
+{
+U[i] = - (ci / ((ai * U[i-1]) + bi));
+V[i] = (di - ai * V[i-1]) / (ai * U[i-1] + bi);
+}
+x[99] = (di - ai * V[98]) / (ai * U[98] + bi);
+printf("X99 = %f", x[99]);
+printf("\n");
+
+for (int j = 98; j >= 0; j--)
+{
+x[j] = U[j] * x[j + 1] + V[j];
+printf("X %d", j); printf(" = %f", x[j]); printf("\n");
+}
+return 0;
+} 
