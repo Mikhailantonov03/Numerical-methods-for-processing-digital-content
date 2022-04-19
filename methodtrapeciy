@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+  double f(double x){
+  return (pow(x,3))/((4 * pow(x,4))+10);
+    }
+int main(void) {
+double a=1,b=10,n=60;
+  double result = 0, h = (b - a) / n;
+  
+  for(int i = 0; i < n; i++) {
+    result += h * ((f(a+(i*h)))+(f(a+((i+1)*h))))/2;
+  }
+  printf("%d",result);
+  return 0;
+}
