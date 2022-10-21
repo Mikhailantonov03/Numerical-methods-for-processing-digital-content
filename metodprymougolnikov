@@ -1,15 +1,24 @@
-#include <stdio.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
 
-  double f(double x){
-  return (pow(x,3))/((4 * pow(x,4))+10);
-    }
-int main(void) {
-double a=1,b=10,n=10000;
-  double result = 0, h = (b - a) / n;
-  
-  for(int i = 0; i < n; i++) {
-    result += h* f(a+i*h);
-  }
-  printf("%d",result);
-  return 0;
+double f(double x) {
+	return (pow(x,3))/((4 * pow(x,4))+10);
+}
+int main() {
+	setlocale(LC_ALL, "Rus");
+	double ruk = 0.497364;
+	double a = 1, b = 10;
+	double n = 300;
+	double h;
+	double x0 = a;
+	double s = 0;
+	double x;
+	h = (b - a) / n;
+	for (int i = 0; i < n; i++) {
+		s = s + (h * f(x0));
+		x0 = x0+h;
+	}
+	cout << "Решение руками: " << ruk << endl;
+	cout << "Решение программы: " << s << endl;
 }
