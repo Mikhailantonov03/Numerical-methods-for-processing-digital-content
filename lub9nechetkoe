@@ -1,0 +1,95 @@
+#include <iostream>
+#include <locale>
+using namespace std;
+float A_1(float x) {
+return 0.3 * x;
+}
+float A_2(float x) {
+return 0,6;
+}
+float A_3(float x) {
+return 0.6 / (x - 6);
+}
+float Systems_F(int a, int b, int c, int d, float x) {
+if (x >= a && x <= b) {
+return A_1(x);
+}
+else if (x > b && x <= c) {
+return A_2(x);
+}
+else if (x > c && x <= d) {
+return A_3(x);
+}
+else {
+return 0;
+}
+}
+float Systems_xF(int a, int b, int c, int d, float x) {
+if (x >= a && x <= b) {
+return x * A_1(x);
+}
+else if (x > b && x <= c) {
+return x * A_2(x);
+}
+else if (x > c && x <= d) {
+return x * A_3(x);
+}
+else {
+return 0;
+}
+}
+float Integral(int start, int edge_1, int edge_2, int end) {
+int n = 200;
+float h = (float)(end - start) / n, su = 0;
+for (int i = 0; i < n; i++) {
+su = su + Systems_F(start, edge_1, edge_2, end, float(start) + h *
+float(i));
+}
+su = su * h;
+return su;
+}
+float Integral_Up(int start, int edge_1, int edge_2, int end) {
+int n = 200;
+float h = (float)(end - start) / n, su = 0;
+for (int i = 0; i < n; i++) {
+su = su + Systems_xF(start, edge_1, edge_2, end, float(start) + h *
+float(i));
+}
+su = su * h;
+return su;
+}
+float Median_Method(int start, int edge_1, int edge_2, int end, float Half_Sq) {
+int n = 200;
+float h = (float)(end - start) / n, su = 0;
+for (int i = 0; i < n; i++) {
+su = su + h * Systems_F(start, edge_1, edge_2, end, float(start) + h *
+float(i));
+if (su >= Half_Sq) {
+return float(start) + h * float(i);
+}
+}
+}
+int main() {
+setlocale(LC_ALL, "ru");
+float a1 = 0, a2 = 2, a3 = 7, b3 = 10;
+float alf = 0.2;
+float result_C_W, result_H;
+cout << "Рассчитаем по Методу центра тяжести....\n";
+result_C_W = Integral_Up(a1, a2, a3, b3) / Integral(a1, a2, a3, b3);
+cout.precision(2);
+cout << fixed << "Результат дефаззификации: y* = " << result_C_W << endl;
+cout << "\nРассчитаем по Методу высотной дефаззификации....\n";
+float X1_alf;
+X1_alf = alf / 0.3;
+result_H = Integral_Up(X1_alf, a2, a3, b3) / Integral(X1_alf, a2, a3, b3);
+cout.precision(2);
+cout << fixed << "Результат дефаззификации: y* = " << result_H << endl;
+cout << "\nРассчитаем по Медианному методу....\n";
+float All_Sq, Haf_All_Sq, result_Med = 0;
+All_Sq = Integral(a1, a2, a3, b3);
+Haf_All_Sq = All_Sq / 2;
+result_Med = Median_Method(a1, a2, a3, b3, Haf_All_Sq);
+cout.precision(2);
+cout << fixed << "Результат дефаззификации: y* = " << result_Med << endl;
+return 0;
+}
